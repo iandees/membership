@@ -1,6 +1,6 @@
 # Everything needed in production
 
-setuptools==18.5
+setuptools=19.6
 wheel==0.26.0
 
 # Flask
