@@ -15,6 +15,7 @@ class Config(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    HOOK_WUFOO_HANDSHAKE = os.environ.get("HOOK_WUFOO_HANDSHAKE")
 
 
 class ProdConfig(Config):

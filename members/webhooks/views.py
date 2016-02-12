@@ -107,6 +107,12 @@ def stripe_hook():
 
 @blueprint.route('/wufoo', methods=['POST'])
 def wufoo_hook():
+    expected_handshake = current_app.config.get('HOOK_WUFOO_HANDSHAKE')
+    actual_handshake = request.form['HandshakeKey']
+
+    if expected_handshake != actual_handshake:
+        return "Bad handshake", 400
+
     email = request.form['Field19']
 
     data_dict = {
