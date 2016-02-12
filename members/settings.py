@@ -16,6 +16,7 @@ class Config(object):
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     HOOK_WUFOO_HANDSHAKE = os.environ.get("HOOK_WUFOO_HANDSHAKE")
+    HOOK_STRIPE_HANDSHAKE = os.environ.get("HOOK_STRIPE_HANDSHAKE")
 
 
 class ProdConfig(Config):

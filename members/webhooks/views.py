@@ -8,6 +8,12 @@ blueprint = Blueprint('webhooks', __name__, url_prefix='/webhooks')
 
 @blueprint.route('/stripe', methods=['POST'])
 def stripe_hook():
+    expected_handshake = current_app.config.get('HOOK_STRIPE_HANDSHAKE')
+    actual_handshake = request.args.get('handshake')
+
+    if expected_handshake != actual_handshake:
+        return "Bad handshake", 400
+
     body = request.get_json()
     action = body['type']
     livemode = body['livemode']
