@@ -23,6 +23,8 @@ def stripe_hook():
         current_app.logger.info("Skipping webhook for test mode")
         return "OK", 200
 
+    current_app.logger.info("Received Stripe webhook action: " + action)
+
     if action.startswith('charge.'):
         current_app.logger.info("Saving charge.* webhook")
 
@@ -113,6 +115,7 @@ def stripe_hook():
 
 @blueprint.route('/wufoo', methods=['POST'])
 def wufoo_hook():
+    current_app.logger.info("Received Wufoo webhook: " + request.form)
     expected_handshake = current_app.config.get('HOOK_WUFOO_HANDSHAKE')
     actual_handshake = request.form['HandshakeKey']
 
