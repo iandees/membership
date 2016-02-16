@@ -30,8 +30,6 @@ def setup_logging(app):
     logger = app.logger
     logger.setLevel(logging.INFO)
     stream_handler = logging.StreamHandler()
-    formatter = logging.Formatter('%(asctime)s %(hostname)s membership: %(message)s', datefmt='%b %d %H:%M:%S')
-    stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
 
 
