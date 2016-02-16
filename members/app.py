@@ -2,6 +2,9 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
+import logging
+import socket
+
 from members import public, user, member, webhooks
 from members.assets import assets
 from members.extensions import bcrypt, cache, db, debug_toolbar, login_manager, migrate
@@ -19,6 +22,16 @@ def create_app(config_object=ProdConfig):
     register_blueprints(app)
     register_errorhandlers(app)
     return app
+
+
+def setup_logging(app):
+    """Add a stdout handler for logging."""
+    logger = app.logger
+    logger.setLevel(logging.INFO)
+    stream_handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s %(hostname)s membership: %(message)s', datefmt='%b %d %H:%M:%S')
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(stream_handler)
 
 
 def register_extensions(app):
